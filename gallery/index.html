@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Gallery Lightbox</title>
+  <style>
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .gallery img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid #eee;
+      border-radius: 4px;
+      transition: box-shadow 0.2s;
+    }
+    .gallery img:hover {
+      box-shadow: 0 0 8px #888;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #000;
+    }
+    .modal .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      background: rgba(0,0,0,0.3);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery">
+    <img src="https://picsum.photos/id/1015/400/300" alt="Gallery Image 1">
+    <img src="https://picsum.photos/id/1016/400/300" alt="Gallery Image 2">
+    <img src="https://picsum.photos/id/1018/400/300" alt="Gallery Image 3">
+    <img src="https://picsum.photos/id/1020/400/300" alt="Gallery Image 4">
+    <img src="https://picsum.photos/id/1024/400/300" alt="Gallery Image 5">
+  </div>
+
+  <div class="modal" id="modal">
+    <button class="close" id="closeBtn">&times;</button>
+    <img id="modalImg" src="" alt="Large View">
+  </div>
+
+  <script>
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = document.getElementById('closeBtn');
+
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.classList.add('active');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      modalImg.src = '';
+    });
+
+    // Optional: Close modal when clicking outside the image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        modalImg.src = '';
+      }
+    });
+  </script>
+</body>
+</html>
