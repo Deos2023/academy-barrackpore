@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>The Academy Barrackpore - Gallery</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Gallery, Photos, The Academy Barrackpore" name="keywords">
+    <meta content="Photo gallery of The Academy Barrackpore." name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Gallery page specific */
+        .gallery-thumb { width: 100%; height: 220px; object-fit: cover; }
+        .lightbox-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: none; align-items: center; justify-content: center; z-index: 1055; }
+        .lightbox-overlay.show { display: flex; }
+        .lightbox-image { max-width: 92vw; max-height: 92vh; object-fit: contain; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .lightbox-btn { position: absolute; background: rgba(0,0,0,0.5); color: #fff; border: 0; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; }
+        .lightbox-btn:hover { background: rgba(0,0,0,0.7); }
+        .lightbox-close { top: 20px; right: 20px; font-size: 2rem; line-height: 1; }
+        .lightbox-prev { left: 20px; font-size: 2rem; }
+        .lightbox-next { right: 20px; font-size: 2rem; }
+        .lightbox-video { width: 92vw; height: auto; max-height: 92vh; object-fit: contain; background: #000; display: none; }
+        .video-thumb { width: 100%; height: 220px; background: #000; border-radius: .25rem; display: flex; align-items: center; justify-content: center; position: relative; }
+        .video-thumb .play-icon { color: #fff; font-size: 3rem; opacity: 0.9; }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="img/logo.png" alt="The Academy Barrackpore" style="height:70px; margin-right:10px;">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="gallery.html" class="nav-item nav-link active">Gallery</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 page-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Gallery</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Gallery</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Gallery Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Photos & Videos</h6>
+                <h1 class="mb-5">Our Gallery</h1>
+            </div>
+            <div id="gallery-grid" class="row g-3"></div>
+            <div class="text-center wow fadeInUp mt-5" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Videos</h6>
+            </div>
+            <div id="video-grid" class="row g-3"></div>
+        </div>
+    </div>
+    <!-- Gallery End -->
+
+    <!-- Lightbox Overlay -->
+    <div id="lightboxOverlay" class="lightbox-overlay" aria-hidden="true">
+        <button class="lightbox-btn lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-btn lightbox-prev" aria-label="Previous">&#10094;</button>
+        <img id="lightboxImage" class="lightbox-image" alt="" style="display:none;">
+        <video id="lightboxVideo" class="lightbox-video" controls playsinline preload="metadata"></video>
+        <button class="lightbox-btn lightbox-next" aria-label="Next">&#10095;</button>
+    </div>
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Privacy Policy</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">FAQs & Help</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Bus stop Mohanpur/Kathaliya, Village: Sewli (On Barasat-Barrackpore road), Barrackpore, 24 Pgs (N), West Bengal, India, Pin code - 700121</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>9748980580 / 9748894180</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>usha.academy16@Gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="row g-2 pt-2 about-gallery">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 about-gallery-img" src="img/gal7.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 about-gallery-img" src="img/gal8.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 about-gallery-img" src="img/gal9.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 about-gallery-img" src="img/gal10.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 about-gallery-img" src="img/gal11.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1 about-gallery-img" src="img/gal1.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Newsletter</h4>
+                    <p>Stay updated with our latest courses and events.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">The Academy Barrackpore</a>, All Right Reserved.
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        </a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Home</a>
+                            <a href="">Cookies</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Gallery Builder + Lightbox -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // All images in img/ directory (auto-listed here)
+            const images = [
+                'img/about.jpg',
+                'img/carousel-1.jpg',
+                'img/carousel-2.jpg',
+                'img/cat-1.jpg',
+                'img/cat-2.jpg',
+                'img/cat-3.jpg',
+                'img/cat-4.jpg',
+                'img/course-1.jpg',
+                'img/course-2.jpg',
+                'img/course-3.jpg',
+                'img/gal1.jpg',
+                'img/gal10.jpg',
+                'img/gal11.jpg',
+                'img/gal12.jpg',
+                'img/gal13.jpg',
+                'img/gal14.jpg',
+                'img/gal15.jpg',
+                'img/gal16.jpg',
+                'img/gal17.jpg',
+                'img/gal18.jpg',
+                'img/gal19.jpg',
+                'img/gal2.jpg',
+                'img/gal3.jpg',
+                'img/gal4.jpg',
+                'img/gal5.jpg',
+                'img/gal6.jpg',
+                'img/gal7.jpg',
+                'img/gal8.jpg',
+                'img/gal9.jpg',
+                'img/IMG-20250227-WA0006.jpg',
+                'img/IMG-20250227-WA0007.jpg',
+                'img/IMG-20250227-WA0012.jpg',
+                'img/IMG-20250227-WA0014.jpg',
+                'img/IMG-20250820-WA0008.jpg',
+                'img/IMG-20250820-WA0009.jpg',
+                'img/IMG-20250820-WA0010.jpg',
+                'img/IMG-20250820-WA0011.jpg',
+                'img/IMG-20250820-WA0012.jpg',
+                'img/IMG-20250820-WA0013.jpg',
+                'img/IMG-20250820-WA0015.jpg',
+                'img/IMG-20250820-WA0016.jpg',
+                'img/IMG-20250820-WA0017.jpg',
+                'img/IMG-20250820-WA0018.jpg',
+                'img/IMG-20250820-WA0019.jpg',
+                'img/IMG-20250820-WA0020.jpg',
+                'img/IMG-20250820-WA0021.jpg',
+                'img/IMG-20250820-WA0022.jpg',
+                'img/IMG-20250820-WA0023.jpg',
+                'img/IMG-20250820-WA0024.jpg',
+                'img/IMG-20250820-WA0025.jpg',
+                'img/IMG-20250820-WA0026.jpg',
+                'img/IMG-20250820-WA0027.jpg',
+                'img/IMG-20250820-WA0028.jpg',
+                'img/IMG-20250820-WA0029.jpg',
+                'img/IMG-20250820-WA0030.jpg',
+                'img/IMG-20250820-WA0031.jpg',
+                'img/IMG-20250820-WA0032.jpg',
+                'img/IMG-20250820-WA0033.jpg',
+                'img/IMG-20250820-WA0034.jpg',
+                'img/IMG-20250820-WA0035.jpg',
+                'img/IMG-20250820-WA0036.jpg',
+                'img/IMG-20250820-WA0037.jpg',
+                'img/IMG-20250820-WA0038.jpg',
+                'img/IMG-20250820-WA0039.jpg',
+                'img/IMG-20250820-WA0040.jpg',
+                'img/IMG-20250820-WA0041.jpg',
+                'img/IMG-20250820-WA0042.jpg',
+                'img/IMG-20250820-WA0043.jpg',
+                'img/IMG-20250820-WA0044.jpg',
+                'img/IMG-20250820-WA0045.jpg',
+                'img/IMG-20250820-WA0046.jpg',
+                'img/IMG-20250820-WA0047.jpg',
+                'img/IMG-20250820-WA0048.jpg',
+                'img/IMG-20250820-WA0049.jpg',
+                'img/IMG-20250820-WA0050.jpg',
+                'img/IMG-20250820-WA0051.jpg',
+                'img/IMG-20250820-WA0052.jpg',
+                'img/IMG-20250820-WA0053.jpg',
+                'img/IMG-20250820-WA0054.jpg',
+                'img/IMG-20250820-WA0055.jpg',
+                'img/IMG-20250820-WA0056.jpg',
+                'img/IMG-20250820-WA0057.jpg',
+                'img/IMG-20250820-WA0058.jpg',
+                'img/IMG-20250820-WA0059.jpg',
+                'img/IMG-20250820-WA0060.jpg',
+                'img/IMG-20250820-WA0061.jpg',
+                'img/IMG-20250820-WA0062.jpg',
+                'img/IMG-20250820-WA0063.jpg',
+                'img/IMG-20250820-WA0064.jpg',
+                'img/IMG-20250820-WA0065.jpg',
+                'img/IMG-20250820-WA0066.jpg',
+                'img/IMG-20250820-WA0067.jpg',
+                'img/IMG-20250820-WA0068.jpg',
+                'img/IMG-20250820-WA0069.jpg',
+                'img/IMG-20250820-WA0070.jpg',
+                'img/IMG-20250820-WA0071.jpg',
+                'img/IMG-20250820-WA0072.jpg',
+                'img/IMG-20250820-WA0073.jpg',
+                'img/IMG-20250820-WA0074.jpg',
+                'img/IMG-20250820-WA0075.jpg',
+                'img/IMG-20250820-WA0076.jpg',
+                'img/IMG-20250820-WA0077.jpg',
+                'img/IMG-20250820-WA0078.jpg',
+                'img/IMG-20250820-WA0079.jpg',
+                'img/IMG-20250820-WA0080.jpg',
+                'img/IMG-20250820-WA0081.jpg',
+                'img/IMG-20250820-WA0082.jpg',
+                'img/IMG-20250820-WA0083.jpg',
+                'img/IMG-20250820-WA0084.jpg',
+            ];
+            const videos = [
+                'img/VID-20250820-WA0002.mp4',
+                'img/VID-20250820-WA0003.mp4',
+                'img/VID-20250820-WA0004.mp4'
+            ];
+            const media = images.map(src => ({ src, type: 'image' }))
+                .concat(videos.map(src => ({ src, type: 'video' })));
+
+            // Build grids
+            const imageGrid = document.getElementById('gallery-grid');
+            const videoGrid = document.getElementById('video-grid');
+
+            // Images
+            images.forEach((src, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-lg-3 wow fadeInUp';
+                col.setAttribute('data-wow-delay', (0.05 * (index % 6)).toFixed(2) + 's');
+
+                const a = document.createElement('a');
+                a.href = src;
+                a.className = 'd-block position-relative';
+                a.dataset.index = String(index); // index in media
+
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = '';
+                img.loading = 'lazy';
+                img.className = 'img-fluid rounded shadow-sm gallery-thumb';
+
+                a.appendChild(img);
+                col.appendChild(a);
+                imageGrid.appendChild(col);
+            });
+
+            // Videos
+            videos.forEach((src, i) => {
+                const index = images.length + i; // index in media
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-lg-3 wow fadeInUp';
+                col.setAttribute('data-wow-delay', (0.05 * (index % 6)).toFixed(2) + 's');
+
+                const a = document.createElement('a');
+                a.href = src;
+                a.className = 'd-block position-relative';
+                a.dataset.index = String(index);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'video-thumb shadow-sm rounded';
+                const icon = document.createElement('i');
+                icon.className = 'bi bi-play-fill play-icon';
+                thumb.appendChild(icon);
+                a.appendChild(thumb);
+
+                col.appendChild(a);
+                videoGrid.appendChild(col);
+            });
+
+            // Lightbox logic
+            const overlay = document.getElementById('lightboxOverlay');
+            const imgEl = document.getElementById('lightboxImage');
+            const videoEl = document.getElementById('lightboxVideo');
+            const btnClose = overlay.querySelector('.lightbox-close');
+            const btnPrev = overlay.querySelector('.lightbox-prev');
+            const btnNext = overlay.querySelector('.lightbox-next');
+
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                currentIndex = index;
+                overlay.classList.add('show');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                updateLightbox();
+            }
+
+            function closeLightbox() {
+                overlay.classList.remove('show');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                if (videoEl) {
+                    try { videoEl.pause(); } catch(e) {}
+                    videoEl.removeAttribute('src');
+                    while (videoEl.firstChild) videoEl.removeChild(videoEl.firstChild);
+                    videoEl.onloadeddata = null;
+                    videoEl.load();
+                }
+            }
+
+            function updateLightbox() {
+                const item = media[currentIndex];
+                // Cleanup before switching
+                try { videoEl.pause(); } catch(e) {}
+                videoEl.onloadeddata = null;
+
+                if (item.type === 'image') {
+                    imgEl.style.display = '';
+                    videoEl.style.display = 'none';
+                    // Clear video sources
+                    videoEl.removeAttribute('src');
+                    while (videoEl.firstChild) videoEl.removeChild(videoEl.firstChild);
+                    videoEl.load();
+
+                    imgEl.src = item.src;
+                } else {
+                    imgEl.style.display = 'none';
+                    imgEl.removeAttribute('src');
+
+                    videoEl.style.display = '';
+                    // Ensure inline playback on mobile
+                    videoEl.setAttribute('playsinline', '');
+                    videoEl.setAttribute('webkit-playsinline', '');
+                    videoEl.controls = true;
+                    videoEl.muted = false;
+
+                    // Rebuild sources for reliability
+                    videoEl.removeAttribute('src');
+                    while (videoEl.firstChild) videoEl.removeChild(videoEl.firstChild);
+                    const source = document.createElement('source');
+                    source.src = item.src;
+                    source.type = 'video/mp4';
+                    videoEl.appendChild(source);
+
+                    videoEl.load();
+
+                    // Try to play with sound; if blocked, retry muted
+                    const attemptPlay = () => {
+                        const playPromise = videoEl.play();
+                        if (playPromise && typeof playPromise.then === 'function') {
+                            playPromise.catch(() => {
+                                videoEl.muted = true;
+                                videoEl.play().catch(() => {});
+                            });
+                        }
+                    };
+
+                    videoEl.onloadeddata = attemptPlay;
+                    videoEl.onloadedmetadata = attemptPlay;
+                    attemptPlay();
+                }
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % media.length;
+                updateLightbox();
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + media.length) % media.length;
+                updateLightbox();
+            }
+
+            function handleGridClick(e) {
+                const link = e.target.closest('a');
+                if (!link) return;
+                e.preventDefault();
+                const idx = parseInt(link.dataset.index || '0', 10);
+                openLightbox(idx);
+            }
+            imageGrid.addEventListener('click', handleGridClick);
+            videoGrid.addEventListener('click', handleGridClick);
+
+            btnClose.addEventListener('click', closeLightbox);
+            btnNext.addEventListener('click', showNext);
+            btnPrev.addEventListener('click', showPrev);
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeLightbox();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (!overlay.classList.contains('show')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') showNext();
+                if (e.key === 'ArrowLeft') showPrev();
+            });
+        });
+    </script>
+</body>
+
+</html>
