@@ -105,5 +105,43 @@
         }
     });
     
+// Floating WhatsApp and Call buttons (bottom-left on every page)
+    $(function() {
+        if (document.getElementById('floating-cta')) return;
+
+        // Inject styles
+        if (!document.getElementById('floating-cta-style')) {
+            const style = document.createElement('style');
+            style.id = 'floating-cta-style';
+            style.textContent = `
+                #floating-cta { position: fixed; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0)); display: flex; flex-direction: column; gap: 12px; z-index: 1080; }
+                #floating-cta .cta-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; box-shadow: 0 8px 20px rgba(0,0,0,0.25); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+                #floating-cta .cta-btn i { font-size: 1.5rem; line-height: 1; }
+                #floating-cta .cta-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 28px rgba(0,0,0,0.3); }
+                #floating-cta .cta-whatsapp { background: #25D366; }
+                #floating-cta .cta-call { background: #0d6efd; }
+                @media (max-width: 576px) { #floating-cta .cta-btn { width: 52px; height: 52px; } }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Build buttons
+        const msg = 'Hello! I would like to know more about your courses.';
+        const whatsappHref = 'https://wa.me/919748980580?text=' + encodeURIComponent(msg);
+        const callHref = 'tel:+919748980580';
+
+        const container = document.createElement('div');
+        container.id = 'floating-cta';
+        container.innerHTML = `
+            <a href="${whatsappHref}" class="cta-btn cta-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>
+            <a href="${callHref}" class="cta-btn cta-call" aria-label="Call us">
+                <i class="bi bi-telephone-fill"></i>
+            </a>
+        `;
+        document.body.appendChild(container);
+    });
+
 })(jQuery);
 
